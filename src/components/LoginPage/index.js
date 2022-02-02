@@ -3,15 +3,15 @@ import { Container, Input, Button, P, Form, H1 } from './styles';
 import { useContext, useState } from 'react';
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker';
 import axios from 'axios';
-// import logo from "../../assets/images/trackit.png";
-// import UserContext from '../../contexts/UserContext';
+import UserContext from '../../contexts/UserContext';
 import Spinner from '../Spinner';
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const { setToken, setImage } = useContext(UserContext);
+    const { setToken } = useContext(UserContext);
     const { promiseInProgress } = usePromiseTracker();
+
     let navigate = useNavigate();
 
     // if (localStorage.length > 0) {
@@ -21,40 +21,40 @@ function Login() {
     //     setImage(user.image);
     //     navigate("/hoje");
     // }
+    const data = {
+        email: email,
+        password: password,
+    };
 
     function handleSignIn(event) {
         event.preventDefault();
 
-        const data = {
-            email: email,
-            password: password,
-        };
+        function fetch() {
+            const promisse = axios.post("http://localhost:5000/login", data);
+            promisse.then(handleResponse);
+            promisse.catch(handleError);
+            return promisse ;
+        }
 
-        // function fetch() {
-        //     const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", data);
-        //     promisse.then(handleResponse);
-        //     promisse.catch(handleError);
-        //     return promisse ;
-        // }
+        function handleResponse(response) {
+            const user = response.data;
+            setToken(user.token);
+            // const serializedUser = JSON.stringify(user);
+            // localStorage.setItem("user", serializedUser);
+            navigate("/wallet");
+        }
 
-        // function handleResponse(response) {
-        //     const user = response.data;
-        //     setImage(user.image);
-        //     setToken(user.token);
-        //     const serializedUser = JSON.stringify(user);
-        //     localStorage.setItem("user", serializedUser);
-        //     navigate("/hoje");
-        // }
+        function handleError(error) {
+            if (error.response.status === 422) {
+                alert("Preencha todos os campos corretamente!")
+            } else if (error.response.status === 401) {
+                alert("E-mail ou senha incorreta!")
+            }
+            console.dir("num funfo :(");
+            console.dir(error);
+        }
 
-        // function handleError(error) {
-        //     if (error.response.status === 422) {
-        //         alert("Preencha todos os campos corretamente!")
-        //     } else if (error.response.status === 401) {
-        //         alert("Usuário ou senha incorreta, verifique!")
-        //     }
-        //     console.dir(error);
-        // }
-        // trackPromise(fetch());
+        trackPromise(fetch());
     }
 
     return (
