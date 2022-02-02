@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+  }
+    
+  body {
+    font-family: raleway, sans-serif;
+    background-color: #8C11BE;
+  }
+
+  a {
+    text-decoration: none;
+  }
