@@ -29,13 +29,19 @@ const Top = styled.div`
 `;
 
 const Records = styled.section`
+    display: flex;
+    flex-direction: column; 
+
     width: 326px;
     height: 446px;
+    padding: 22px 11px 11px 11px;
 
     background: #FFFFFF;
     border-radius: 5px;
 
     margin-bottom: 13px;
+
+    position: relative;
 
     p {
         font-size: 20px;
@@ -83,6 +89,72 @@ const NewRecord= styled.div`
     }
 `;
 
+const Div = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+`;
+
+const Name = styled.span`
+    margin-left: 5px;
+
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+`;
+
+const Date = styled.time`
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #C6C6C6;
+`;
+
+const Value = styled.span`
+    font-size: 16px;
+    line-height: 19px;
+
+    color: ${props => props.type === "entry" ? "#03AC00" : '#C70000'};
+`;
+
+const BalanceDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    width: 304px;
+
+    position: absolute;
+    bottom: 11px;
+
+    p {
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 20px;
+        color: #000000;
+    }
+
+    div {
+        font-size: 17px;
+        line-height: 20px;
+        color: ${props => props.balance ? "#03AC00" :'#C70000'};
+    }
+`;
+
+const NoRecords = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%
+`;
+
+const P = styled.p`
+    width: 180px;
+    text-align: center;
+`;
+
 export {
-    Container, Records, Top, Bottom, NewRecord
+    Container, Records, Top, Bottom, NewRecord, Div, Name, Date, Value, BalanceDiv, NoRecords, P
 }

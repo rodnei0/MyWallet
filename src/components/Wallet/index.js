@@ -1,34 +1,43 @@
-import { Bottom, Container, NewRecord, Records, Top } from "./style.js"
+import { Bottom, Container, Name, NewRecord, Records, Top, NoRecords, P } from "./style.js"
 import { useMemo, useContext, useEffect } from 'react';
-import axios from 'axios';
 import UserContext from "../../contexts/UserContext";
+import axios from 'axios';
+import ShowRecords from "./Records.js"
+import Balance from "./Balance.js"
 
-let array = [
+let records = [
 	{
 		id: 1,
 		name: "Cinema",
 		value: 30.00,
         type: "exit",
-        date: "25/01/2022"
+        date: "25/01"
 	},
 	{
 		id: 2,
 		name: "Churrasco",
 		value: 57.30,
         type: "exit",
-        date: "30/01/2022"
+        date: "30/01"
 	},
     {
 		id: 3,
 		name: "Salário",
 		value: 2758.00,
         type: "entry",
-        date: "02/02/2022"
+        date: "02/02"
+	},
+    {
+		id: 4,
+		name: "Ração gata",
+		value: 68.00,
+        type: "exit",
+        date: "03/02"
 	}
 ]
 
-function GetRecords() {
 
+function GetRecords() {
     const { token } = useContext(UserContext);
     
     const config = useMemo(() => {
@@ -46,32 +55,42 @@ function GetRecords() {
             console.log(response);
             return true
         });
-        // promisse.then(response => setHabits(response.data));
         promisse.catch(response => {
             console.log(response);
             return false
         });
-        // promisse.catch(response => console.log(response))
     };
 
     useEffect(fetch, [config]);
 }
 
 function Wallet() {
+    const { name } = useContext(UserContext);
+    // const { name, records } = useContext(UserContext);
+    console.log(name);
+
     return (
         <Container>
             <Top>
-                <p>Olá, Fulano</p>
+                <p>Olá, {name}</p>
                 <ion-icon name="log-out-outline"></ion-icon>
             </Top>
             <Records>
-                {GetRecords() ? <p>Vai aparece coisos aqui</p> : <p>Não há registros de entrada ou saída</p>}
-
-                {/* {array.map(arr => ( 
+                {/* {GetRecords() ? 
                     <>
-                        <span>{arr.date}</span>{arr.name}<span></span><span>{arr.value}</span>
+                        <ShowRecords records={records} />
+                        <Balance records={records}/>
                     </>
-                )) } */}
+                 :                     <>
+                 <ShowRecords records={records} />
+                 <Balance records={records}/>
+             </>} */}
+                {GetRecords() ?                     
+                    <>
+                        <ShowRecords records={records} />
+                        <Balance records={records}/>
+                    </> : <NoRecords><P>Não há registros de entrada ou saída</P></NoRecords>}
+                
             </Records>
             <Bottom>
                 <NewRecord>

@@ -8,9 +8,10 @@ import Wallet from './components/Wallet';
 function App() {
     const [token, setToken] = useState("");
     const [name, setName] = useState("");
+    const [records, setRecords] = useState("");
 
     return (
-        <UserContext.Provider value={{token, setToken, name, setName}}>
+        <UserContext.Provider value={{token, setToken, name, setName, records, setRecords}}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login />}/>
