@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker';
 import { Container, H1, Form, Input, Button, P } from './styles';
-// import logo from "../../assets/images/trackit.png";
+import UserContext from '../../contexts/UserContext';
 import axios from 'axios';
 import Spinner from '../Spinner';
 
+
 function SingUp() {
     const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const {name, setName} = useContext(UserContext);
     
     const { promiseInProgress } = usePromiseTracker();
     let navigate = useNavigate();

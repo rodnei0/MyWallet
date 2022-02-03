@@ -10,11 +10,11 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-    width: 303px;
+    width: 326px;
 `;
 
 const Input = styled.input`
-    width: 303px;
+    width: 100%;
     height: 45px;
     padding-left: 5px;
 
@@ -32,7 +32,7 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
 
-    width: 303px;
+    width: 100%;
     height: 45px;
 
     font-size: 20.976px;
