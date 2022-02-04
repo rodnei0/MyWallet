@@ -34,7 +34,7 @@ function Wallet() {
             const promisse = axios.get("http://localhost:5000/records", config);
             promisse.then(response => {
                 if (response.data.length > 0) {
-                    setRecords(response.data)
+                    setRecords(response.data.reverse())
                     setTest(true)
                 }
             });
