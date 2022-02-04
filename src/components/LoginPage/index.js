@@ -14,13 +14,7 @@ function Login() {
 
     let navigate = useNavigate();
 
-    // if (localStorage.length > 0) {
-    //     const serializedUser = localStorage.getItem("user");
-    //     const user = JSON.parse(serializedUser);
-    //     setToken(user.token);
-    //     setImage(user.image);
-    //     navigate("/hoje");
-    // }
+
     const data = {
         email: email,
         password: password,
@@ -38,11 +32,12 @@ function Login() {
 
         function handleResponse(response) {
             const user = response.data;
+            console.log(user);
             setToken(user.token);
-            setName(user.name);
+            // setName(user.name);
             setRecords(user.records);
-            // const serializedUser = JSON.stringify(user);
-            // localStorage.setItem("user", serializedUser);
+            const serializedUser = JSON.stringify(user);
+            localStorage.setItem("user", serializedUser);
             navigate("/wallet");
         }
 

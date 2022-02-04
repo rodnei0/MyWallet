@@ -4,37 +4,39 @@ import UserContext from "../../contexts/UserContext";
 import axios from 'axios';
 import ShowRecords from "./Records.js"
 import Balance from "./Balance.js"
+import { Link } from "react-router-dom";
 
 let records = [
 	{
 		id: 1,
-		name: "Cinema",
+		description: "Cinema",
 		value: 30.00,
         type: "exit",
         date: "25/01"
 	},
 	{
 		id: 2,
-		name: "Churrasco",
+		description: "Churrasco",
 		value: 57.30,
         type: "exit",
         date: "30/01"
 	},
     {
 		id: 3,
-		name: "Salário",
+		description: "Salário",
 		value: 2758.00,
         type: "entry",
         date: "02/02"
 	},
     {
 		id: 4,
-		name: "Ração gata",
+		description: "Ração gata",
 		value: 68.00,
         type: "exit",
         date: "03/02"
 	}
 ]
+
 
 
 function GetRecords() {
@@ -65,9 +67,13 @@ function GetRecords() {
 }
 
 function Wallet() {
-    const { name } = useContext(UserContext);
-    // const { name, records } = useContext(UserContext);
-    console.log(name);
+    const { name, setName } = useContext(UserContext);
+
+    if (localStorage.length > 0) {
+        const serializedUser = localStorage.getItem("user");
+        const user = JSON.parse(serializedUser);
+        setName(user.name);
+    }
 
     return (
         <Container>
@@ -89,18 +95,23 @@ function Wallet() {
                     <>
                         <ShowRecords records={records} />
                         <Balance records={records}/>
-                    </> : <NoRecords><P>Não há registros de entrada ou saída</P></NoRecords>}
-                
+                    </> : 
+                        <NoRecords><P>Não há registros de entrada ou saída</P></NoRecords>
+                }
             </Records>
             <Bottom>
-                <NewRecord>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                    <p>Nova entrada</p>
-                </NewRecord>
-                <NewRecord>
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                    <p>Nova saída</p>
-                </NewRecord>
+                <Link to="/entry">
+                    <NewRecord>
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        <p>Nova entrada</p>
+                    </NewRecord>
+                </Link>
+                <Link to="/exit">
+                    <NewRecord>
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        <p>Nova saída</p>
+                    </NewRecord>
+                </Link>
             </Bottom>
 
         </Container>

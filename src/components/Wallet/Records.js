@@ -6,7 +6,7 @@ function Records({records}) {
             {records.map(record => ( 
                 <Div>
                     <div>
-                        <Date>{record.date}</Date><Name>{record.name}</Name>
+                        <Date>{record.date}</Date><Name>{record.description}</Name>
                     </div>
                     <Value type={record.type}>{record.value.toFixed(2)}</Value>
                 </Div>

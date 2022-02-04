@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const Container = styled.div`
     display: flex;
     flex-direction: column;     
-    justify-content: center;
     align-items: center;
 
+    padding-top: 25px;
     min-height: 100vh;
 `;
 
@@ -63,21 +63,15 @@ const Button = styled.button`
 `;
 
 const P = styled.p`
-    font-size: 13.976px;
+    width: 326px;
+    margin-bottom: 40px;
+
     font-weight: bold;
-    line-height: 17px;
+    font-size: 26px;
+    line-height: 31px;
     color: #FFFFFF;
-`;
-
-const H1 = styled.h1`
-    font-family: Saira Stencil One;
-    font-size: 32px;
-    line-height: 50px;
-    color: #FFFFFF;
-
-    margin-bottom: 25px;
 `;
 
 export {
-    Container, Form, Input, Button, P, H1
+    Container, Form, Input, Button, P
 }

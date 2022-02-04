@@ -4,6 +4,8 @@ import Login from './components/LoginPage';
 import SingUp from './components/SignUpPage';
 import UserContext from './contexts/UserContext';
 import Wallet from './components/Wallet';
+import NewEntry from './components/Records/NewEntry';
+import NewExit from './components/Records/NewExit';
 
 function App() {
     const [token, setToken] = useState("");
@@ -17,6 +19,8 @@ function App() {
                     <Route path="/" element={<Login />}/>
                     <Route path="/sign-up" element={<SingUp />}/>
                     <Route path="/wallet" element={<Wallet />}/>
+                    <Route path="/entry" element={<NewEntry />}/>
+                    <Route path="/exit" element={<NewExit />}/>
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
