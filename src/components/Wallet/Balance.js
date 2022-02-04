@@ -10,6 +10,7 @@ function Balance({records}) {
         } else {
             balance-= record.value
         }
+        return balance
     });
 
     return (

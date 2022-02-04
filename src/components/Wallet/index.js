@@ -1,5 +1,5 @@
-import { Bottom, Container, Name, NewRecord, Records, Top, NoRecords, P } from "./style.js"
-import { useMemo, useContext, useEffect } from 'react';
+import { Bottom, Container, NewRecord, Records, Top, NoRecords, P } from "./style.js"
+import { useMemo, useContext, useEffect, useState } from 'react';
 import UserContext from "../../contexts/UserContext";
 import axios from 'axios';
 import ShowRecords from "./Records.js"
@@ -41,7 +41,8 @@ let records = [
 
 function GetRecords() {
     const { token } = useContext(UserContext);
-    
+    const [ test, setTest ] = useState("");
+      
     const config = useMemo(() => {
         const data = {
             headers: {
@@ -52,18 +53,20 @@ function GetRecords() {
     }, [token]);
     
     function fetch() {
-        const promisse = axios.get("http://localhost:5000/wallet", config);
+        const promisse = axios.get("http://localhost:5000/records", config);
         promisse.then(response => {
             console.log(response);
-            return true
+            setTest(true)
         });
         promisse.catch(response => {
             console.log(response);
-            return false
+            setTest(false)
         });
     };
 
     useEffect(fetch, [config]);
+
+    return test
 }
 
 function Wallet() {

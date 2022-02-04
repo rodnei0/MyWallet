@@ -1,62 +1,53 @@
-import { Link, useNavigate  } from 'react-router-dom';
-import { Container, Input, Button, P, Form, H1 } from './styles';
-import { useContext, useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import { Container, Input, Button, P, Form } from './styles';
+import { useState, useContext, useMemo } from 'react';
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker';
 import axios from 'axios';
-import UserContext from '../../contexts/UserContext';
 import Spinner from '../Spinner';
+import UserContext from '../../contexts/UserContext';
 
 function NewExit() {
     const [value, setValue] = useState("");
     const [description, setDescription] = useState("");
     const { promiseInProgress } = usePromiseTracker();
+    const { token } = useContext(UserContext);
 
-    // let navigate = useNavigate();
+    const data = {
+        value: value,
+        description: description,
+        type: "exit"
+    };
 
-    // // if (localStorage.length > 0) {
-    // //     const serializedUser = localStorage.getItem("user");
-    // //     const user = JSON.parse(serializedUser);
-    // //     setToken(user.token);
-    // //     setImage(user.image);
-    // //     navigate("/hoje");
-    // // }
-    // const data = {
-    //     email: email,
-    //     password: password,
-    // };
+      
+    const config = useMemo(() => {
+        const data = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        return data;
+    }, [token]);
+
+    let navigate = useNavigate();
 
     function handleSignIn(event) {
-    //     event.preventDefault();
+        event.preventDefault();
 
-    //     function fetch() {
-    //         const promisse = axios.post("http://localhost:5000/login", data);
-    //         promisse.then(handleResponse);
-    //         promisse.catch(handleError);
-    //         return promisse ;
-    //     }
+        function fetch() {
+            const promisse = axios.post("http://localhost:5000/records", data, config);
+            promisse.then(response => navigate("/wallet"));
+            promisse.catch(handleError);
+            return promisse ;
+        }
 
-    //     function handleResponse(response) {
-    //         const user = response.data;
-    //         console.log(user);
-    //         setToken(user.token);
-    //         setName(user.name);
-    //         setRecords(user.records);
-    //         // const serializedUser = JSON.stringify(user);
-    //         // localStorage.setItem("user", serializedUser);
-    //         navigate("/wallet");
-    //     }
+        function handleError(error) {
+            if (error.response.status === 422) {
+                alert("Preencha todos os campos corretamente!")
+            }
+            console.dir(error);
+        }
 
-    //     function handleError(error) {
-    //         if (error.response.status === 422) {
-    //             alert("Preencha todos os campos corretamente!")
-    //         } else if (error.response.status === 401) {
-    //             alert("E-mail ou senha incorreta!")
-    //         }
-    //         console.dir("num funfo :(");
-    //         console.dir(error);
-    //     }
-
-    //     trackPromise(fetch());
+        trackPromise(fetch());
     }
 
     return (

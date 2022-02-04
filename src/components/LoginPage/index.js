@@ -9,7 +9,7 @@ import Spinner from '../Spinner';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { setToken, setName, setRecords } = useContext(UserContext);
+    const { setToken, setRecords } = useContext(UserContext);
     const { promiseInProgress } = usePromiseTracker();
 
     let navigate = useNavigate();
@@ -32,7 +32,6 @@ function Login() {
 
         function handleResponse(response) {
             const user = response.data;
-            console.log(user);
             setToken(user.token);
             // setName(user.name);
             setRecords(user.records);
@@ -47,8 +46,7 @@ function Login() {
             } else if (error.response.status === 401) {
                 alert("E-mail ou senha incorreta!")
             }
-            console.dir("num funfo :(");
-            console.dir(error);
+            console.log(error);
         }
 
         trackPromise(fetch());
