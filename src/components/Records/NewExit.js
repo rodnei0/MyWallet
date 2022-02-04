@@ -13,7 +13,7 @@ function NewExit() {
     const { token } = useContext(UserContext);
 
     const data = {
-        value: value,
+        value: parseFloat(value),
         description: description,
         type: "exit"
     };

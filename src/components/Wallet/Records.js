@@ -4,7 +4,7 @@ function Records({records}) {
     return (
         <>
             {records.map(record => ( 
-                <Div>
+                <Div key={record._id}>
                     <div>
                         <Date>{record.date}</Date><Name>{record.description}</Name>
                     </div>

@@ -23,6 +23,10 @@ const Top = styled.div`
 
     margin-bottom: 22px;
 
+    ion-icon {
+        color: #FFFFFF;
+    }
+
     ion-icon:hover {
         cursor: pointer;
     }
@@ -77,7 +81,7 @@ const NewRecord= styled.div`
 
     &:hover {
         cursor: pointer;
-      }
+    }
 
     ion-icon {
         font-size: 22px;

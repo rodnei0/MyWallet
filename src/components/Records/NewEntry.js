@@ -13,7 +13,7 @@ function NewEntry() {
     const { token } = useContext(UserContext);
 
     const data = {
-        value: value,
+        value: parseFloat(value),
         description: description,
         type: "entry"
     };
@@ -35,7 +35,7 @@ function NewEntry() {
 
         function fetch() {
             const promisse = axios.post("http://localhost:5000/records", data, config);
-            promisse.then(navigate("/wallet"));
+            promisse.then(response => navigate("/wallet"));
             promisse.catch(handleError);
             return promisse ;
         }
