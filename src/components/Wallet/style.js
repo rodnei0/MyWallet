@@ -7,6 +7,15 @@ const Container = styled.div`
     align-items: center;
 
     min-height: 100vh;
+
+    ion-icon {
+        margin-top: 2px;
+        color: #C6C6C6;
+    }
+
+    ion-icon:hover {
+        cursor: pointer;
+    }
 `;
 
 const Top = styled.div`
@@ -98,6 +107,11 @@ const Div = styled.div`
     justify-content: space-between;
 
     margin-bottom: 10px;
+
+    div {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 const Name = styled.span`
@@ -118,6 +132,7 @@ const Date = styled.time`
 const Value = styled.span`
     font-size: 16px;
     line-height: 19px;
+    margin-right: 5px;
 
     color: ${props => props.type === "entry" ? "#03AC00" : '#C70000'};
 `;

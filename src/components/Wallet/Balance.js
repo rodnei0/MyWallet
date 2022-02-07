@@ -1,6 +1,5 @@
 import { BalanceDiv } from "./style.js"
 
-
 function Balance({records}) {
     let balance = 0;
     
