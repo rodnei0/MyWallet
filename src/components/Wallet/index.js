@@ -34,7 +34,7 @@ function Wallet() {
             const promisse = axios.get("http://localhost:5000/records", config);
             promisse.then(response => {
                 if (response.data.length > 0) {
-                    setRecords(response.data.reverse())
+                    setRecords(response.data.reverse());
                     setTest(true)
                 }
             });
@@ -67,13 +67,13 @@ function Wallet() {
                 }
             </Records>
             <Bottom>
-                <Link to="/entry">
+                <Link to="/newrecord" state={ {type: "entry"}}>
                     <NewRecord>
                         <ion-icon name="add-circle-outline"></ion-icon>
                         <p>Nova entrada</p>
                     </NewRecord>
                 </Link>
-                <Link to="/exit">
+                <Link to="/newrecord" state={ {type: "exit"}}>
                     <NewRecord>
                         <ion-icon name="add-circle-outline"></ion-icon>
                         <p>Nova saída</p>

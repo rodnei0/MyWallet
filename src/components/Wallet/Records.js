@@ -2,6 +2,7 @@ import { Div, Date, Name, Value } from "./style.js"
 import axios from "axios";
 import { useContext, useMemo } from "react";
 import UserContext from "../../contexts/UserContext.js";
+import { Link } from "react-router-dom";
 
 function Records({records}) {
     const { token, setRecords } = useContext(UserContext);
@@ -41,7 +42,9 @@ function Records({records}) {
                 <Div key={record._id}>
                     <div>
                         <Date>{record.date}</Date>
-                        <Name>{record.description}</Name>
+                        <Link to="/updaterecord" state={{ record: record }}>
+                            <Name>{record.description}</Name>
+                        </Link>
                     </div>
                     <div>
                         <Value type={record.type}>{record.value.toFixed(2)}</Value>

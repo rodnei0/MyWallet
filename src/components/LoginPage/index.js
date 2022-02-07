@@ -9,12 +9,11 @@ import Spinner from '../Spinner';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { setToken, setRecords } = useContext(UserContext);
+    const { setToken } = useContext(UserContext);
     const { promiseInProgress } = usePromiseTracker();
 
     let navigate = useNavigate();
-
-
+    
     const data = {
         email: email,
         password: password,
@@ -33,8 +32,6 @@ function Login() {
         function handleResponse(response) {
             const user = response.data;
             setToken(user.token);
-            // setName(user.name);
-            setRecords(user.records);
             const serializedUser = JSON.stringify(user);
             localStorage.setItem("user", serializedUser);
             navigate("/wallet");

@@ -1,4 +1,4 @@
-import { useNavigate  } from 'react-router-dom';
+import { useLocation, useNavigate  } from 'react-router-dom';
 import { Container, Input, Button, P, Form } from './styles';
 import { useContext, useMemo, useState } from 'react';
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker';
@@ -6,16 +6,19 @@ import axios from 'axios';
 import Spinner from '../Spinner';
 import UserContext from '../../contexts/UserContext';
 
-function NewEntry() {
+function NewRecord() {
     const [value, setValue] = useState("");
     const [description, setDescription] = useState("");
     const { promiseInProgress } = usePromiseTracker();
     const { token } = useContext(UserContext);
 
+    const location = useLocation();
+    const { type } = location.state;
+
     const data = {
         value: parseFloat(value),
         description: description,
-        type: "entry"
+        type: type
     };
 
       
@@ -52,14 +55,14 @@ function NewEntry() {
 
     return (
         <Container>
-            <P>Nova entrada</P>
+            <P>{type === "entry" ? "Nova entrada" : "Nova saída"}</P>
             <Form onSubmit={handleSignIn}>
                 <Input type="number" value={value} onChange={(e) => setValue(e.target.value)} disabled={promiseInProgress} placeholder='Valor'></Input>
                 <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} disabled={promiseInProgress} placeholder='Descrição'></Input>
-                <Button type='submit' hide={promiseInProgress}><Spinner /><p>Salvar entrada</p></Button>
+                <Button type='submit' hide={promiseInProgress}><Spinner /><p>{type === "entry" ? "Salvar entrada" : "Salvar saída"}</p></Button>
             </Form>
         </Container>
     );
 }
 
-export default NewEntry;
+export default NewRecord;
