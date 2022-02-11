@@ -31,7 +31,7 @@ function SingUp() {
         }
 
         function fetch() {
-            const promisse = axios.post("http://localhost:5000/sign-up", data);
+            const promisse = axios.post("https://rodnei-mywallet.herokuapp.com/sign-up", data);
             promisse.then(response => navigate("/"));
             promisse.catch(handleError);
             return promisse ;

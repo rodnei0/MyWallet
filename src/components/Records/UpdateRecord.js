@@ -37,7 +37,7 @@ function UpdateRecords() {
     function updateRecords(event) {
         event.preventDefault();
 
-        const promisse = axios.put(`http://localhost:5000/records/${_id}`, data, config);
+        const promisse = axios.put(`https://rodnei-mywallet.herokuapp.com/records/${_id}`, data, config);
         promisse.then(navigate("/wallet"));
         promisse.catch(response => {
             console.log(response);

@@ -31,7 +31,7 @@ function Wallet() {
         }, []);
         
         function fetch() {
-            const promisse = axios.get("http://localhost:5000/records", config);
+            const promisse = axios.get("https://rodnei-mywallet.herokuapp.com/records", config);
             promisse.then(response => {
                 if (response.data.length > 0) {
                     setRecords(response.data.reverse());

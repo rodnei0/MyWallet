@@ -18,9 +18,9 @@ function Records({records}) {
 
     function deleteRecords(id) {
         if (window.confirm("Tem certeza que deseja deletar este laçamento?")){
-            const promisse = axios.delete(`http://localhost:5000/records/${id}`, config);
+            const promisse = axios.delete(`https://rodnei-mywallet.herokuapp.com/records/${id}`, config);
             promisse.then(response => {
-                const promisse = axios.get("http://localhost:5000/records", config);
+                const promisse = axios.get("https://rodnei-mywallet.herokuapp.com/records", config);
                 promisse.then(response => {
                     if (response.data.length > 0) {
                         setRecords(response.data.reverse())
