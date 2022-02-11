@@ -23,7 +23,7 @@ function Login() {
         event.preventDefault();
 
         function fetch() {
-            const promisse = axios.post("https://rodnei-mywallet.herokuapp.com//login", data);
+            const promisse = axios.post("https://rodnei-mywallet.herokuapp.com/login", data);
             promisse.then(handleResponse);
             promisse.catch(handleError);
             return promisse ;
