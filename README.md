@@ -1,15 +1,15 @@
 # MyWallet
-<p align="center">
-  <image src="https://github.com/rodnei0/MyWallet/blob/main/src/mywallet.gif" />
-</p>
-<p align="center">
-  Availabe at my-wallet-rodnei0.vercel.app
-</p>
-
 
 ## About
 
 A financial tracking app written in React that allows you to track your incomes and outocomes to help you improve your financial discipline!
+
+<p align="center">
+  <image src="https://github.com/rodnei0/MyWallet/blob/main/src/mywallet.gif" />
+</p>
+<p align="center">
+  Availabe at https://my-wallet-rodnei0.vercel.app/
+</p>
 
 ## Technologies
 
